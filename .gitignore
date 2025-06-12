@@ -1,0 +1,6 @@
+Front/node_modules
+Back/node_modules
+Back/Validation/salaryAdjustments.js
+Back/Validation/attendance.js
+Back/Models/salaryAdjustments.js
+Back/Models/attendance.js
