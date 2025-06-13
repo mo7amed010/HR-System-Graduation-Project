@@ -24,6 +24,7 @@ mongoose
   });
 
 app.use("/dashboard", dashboardRouter);
+app.use("/employee", dashboardRouter);
 
 app.use(function (req, res, next) {
   next(new AppError(404, "Route not found"));
@@ -34,3 +35,4 @@ app.use((err, req, res, next) => {
     .status(err.statusCode || 500)
     .json({ status: "fail", message: err.message || "ops, something wrong" });
 });
+

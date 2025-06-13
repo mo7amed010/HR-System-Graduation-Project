@@ -1,10 +1,19 @@
 exports.validation = (schema) => {
   return (req, res, next) => {
-    const error = schema.validate(req.body, { abortEarly: false });
+    // console.log("DOB", req.body.dob);
+    const {error} = schema.validate(req.body, { abortEarly: false });
     if (!error) {
       next();
     } else {
-      res.status(422).json({ status: "fail", message: error.error.details });
+     const messages = error.details.map((err) => err.message);
+      res.status(422).json({ status: "fail", message: messages });
     }
+// } else {
+//   res.status(422).json({ status: "fail", message: error.error.details });
+// }
   };
 };
+ 
+
+ 
+
