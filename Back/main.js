@@ -23,7 +23,7 @@ mongoose
     console.log(err);
   });
 
-app.use("/dashboard", dashboardRouter);
+app.use("/", dashboardRouter);
 
 app.use(function (req, res, next) {
   next(new AppError(404, "Route not found"));

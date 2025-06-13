@@ -4,3 +4,4 @@ Back/Validation/salaryAdjustments.js
 Back/Validation/attendance.js
 Back/Models/salaryAdjustments.js
 Back/Models/attendance.js
+Back/.env
