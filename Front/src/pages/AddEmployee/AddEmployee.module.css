@@ -1,7 +1,7 @@
 .container {
-  font-size: 0.8em; /* تقليل حجم الخط أكثر ليتناسب مع الصورة */
+  font-size: 0.8em;
   direction: rtl;
-  margin-top: 0.5rem; /* تقليل الهامش العلوي */
+  margin-top: 0.5rem;
 }
 
 .card {
@@ -9,62 +9,62 @@
   display: flex;
   flex-direction: column;
   border: 1px solid #ddd;
-  border-radius: 0.2rem; /* تقليل نصف القطر للزوايا */
-  overflow: hidden; /* لضبط الحدود */
+  border-radius: 0.2rem;
+  overflow: hidden;
 }
 
 .cardBody {
   flex: 1;
-  padding: 0.3rem; /* تقليل الـ padding الداخلي */
+  padding: 0.3rem;
 }
 
 .cardTitle {
-  background: linear-gradient(to right, #6a11cb 0%, #2575fc 100%); /* Gradient background */
-  color: white; /* White text */
-  padding: 0.8rem 1rem; /* Adjust padding */
-  margin-bottom: 1rem; /* Space below title */
-  font-size: 1.2em; /* Increase font size */
-  text-align: right; /* Align text to the right */
-  border-radius: 0.2rem 0.2rem 0 0; /* Rounded top corners */
+  background: linear-gradient(to right, #6a11cb 0%, #2575fc 100%);
+  color: white;
+  padding: 0.8rem 1rem;
+  margin-bottom: 1rem;
+  font-size: 1.2em;
+  text-align: right;
+  border-radius: 0.2rem 0.2rem 0 0;
   display: flex;
   align-items: center;
-  justify-content: flex-end; /* Align icon and text to the right */
-  flex-direction: row-reverse; /* Reverse order of items to put icon on left in RTL */
+  justify-content: flex-end;
+  flex-direction: row-reverse;
 }
 
 .cardTitle svg {
-  margin-right: 0.5rem; /* Space between icon and text when flex-direction is reversed */
+  margin-right: 0.5rem;
 }
 
 .formGroup {
-  margin-bottom: 1rem; /* Increase space between form groups */
-  position: relative; /* For icon positioning */
+  margin-bottom: 1rem;
+  position: relative;
 }
 
 .formLabel {
   display: block;
   font-size: 0.9em;
   margin-bottom: 0.3rem;
-  color: #555; /* Darker label color */
+  color: #555;
 }
 
 .inputIcon {
-  display: inline-block; /* Make it inline with the label */
-  margin-left: 0.5rem; /* Space between icon and label */
-  color: #555; /* Darker icon color to match label */
-  vertical-align: middle; /* Align icon vertically with text */
+  display: inline-block;
+  margin-left: 0.5rem;
+  color: #555;
+  vertical-align: middle;
 }
 
 .formControl {
   width: 100%;
-  padding: 0.5rem 1rem; /* Adjust padding for better look, no space for icon inside */
+  padding: 0.5rem 1rem;
   border: 1px solid #ddd;
-  border-radius: 0.25rem; /* Slightly more rounded corners */
-  font-size: 1em; /* Standard font size */
-  height: auto; /* Let content define height */
-  box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.1); /* Subtle inner shadow */
+  border-radius: 0.25rem;
+  font-size: 1em;
+  height: auto;
+  box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.1);
   transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
-  text-align: left; /* Align text inside to the left */
+  text-align: left;
 }
 
 .formControl:focus {
@@ -76,19 +76,19 @@
 .formSelect {
   width: 100%;
   padding: 0.5rem 1rem;
-  padding-right: 2.5rem; /* Space for text to be right-aligned */
+  padding-right: 2.5rem;
   border: 1px solid #ddd;
   border-radius: 0.25rem;
   font-size: 1em;
   height: auto;
   box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.1);
   transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
-  appearance: none; /* Remove default arrow */
+  appearance: none;
   background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3e%3cpath fill='none' stroke='%23343a40' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M2 5l6 6 6-6'/%3e%3c/svg%3e");
   background-repeat: no-repeat;
-  background-position: left 1rem center; /* Keep arrow on the left */
+  background-position: left 1rem center;
   background-size: 0.65em 0.65em;
-  text-align: right; /* Align text inside to the right */
+  text-align: right;
 }
 
 .formSelect:focus {
@@ -98,31 +98,31 @@
 }
 
 .error {
-  color: #dc3545; /* Bootstrap danger color */
-  font-size: 0.8rem; /* Slightly larger error text */
+  color: #dc3545;
+  font-size: 0.8rem;
   margin-top: 0.25rem;
 }
 
 .buttons {
-  padding: 1rem; /* Increase padding */
+  padding: 1rem;
   display: flex;
-  justify-content: center; /* Center buttons */
-  gap: 1rem; /* Increase space between buttons */
-  margin-top: 0.5rem; /* Reduced space above buttons */
+  justify-content: center;
+  gap: 1rem;
+  margin-top: 0.5rem;
 }
 
 .btn {
-  padding: 0.6rem 1.2rem; /* Increase button padding */
+  padding: 0.6rem 1.2rem;
   border: none;
-  border-radius: 0.25rem; /* Slightly more rounded */
+  border-radius: 0.25rem;
   cursor: pointer;
   font-weight: bold;
-  font-size: 1em; /* Standard button font size */
-  height: auto; /* Let content define height */
+  font-size: 1em;
+  height: auto;
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 0.5rem; /* Space between icon and text */
+  gap: 0.5rem;
   transition: background-color 0.2s ease, transform 0.1s ease;
 }
 
@@ -132,27 +132,26 @@
 }
 
 .btnDanger {
-  background-color: #dc3545; /* Standard red */
+  background-color: #dc3545;
   color: white;
 }
 
 .btnPrimary {
-  background-color: #007bff; /* Standard blue */
+  background-color: #007bff;
   color: white;
 }
 
 .btnSuccess {
-  background-color: #28a745; /* Standard green */
+  background-color: #28a745;
   color: white;
 }
 
-/* New style for the main header */
 .mainHeader {
   background: linear-gradient(to right, #6a11cb 0%, #2575fc 100%);
   color: white;
   padding: 1rem 0;
   text-align: center;
-  margin-bottom: 2rem; /* Space below header */
+  margin-bottom: 2rem;
   border-radius: 0.5rem;
   font-size: 2em;
   display: flex;

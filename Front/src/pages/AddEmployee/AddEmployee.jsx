@@ -20,7 +20,7 @@ import {
 import axios from "axios";
 
 const AddEmployee = () => {
-  const workDetailsRef = useRef(null); // Create a ref for WorkDetailes
+  const workDetailsRef = useRef(null);
 
   const headers = {
     "Content-Type": "application/json",
@@ -104,10 +104,7 @@ const AddEmployee = () => {
         <FaUsers /> الموظفين
       </h1>
       <div className="row justify-content-center">
-        {/* النموذج الأول (البيانات الأساسية) */}
         <div className="col-md-4">
-          {" "}
-          {/* Adjusted width for better layout */}
           <div className={styles.card}>
             <div className={styles.cardTitle}>
               <FaUser /> البيانات الأساسية
@@ -239,19 +236,11 @@ const AddEmployee = () => {
             </div>
           </div>
         </div>
-
-        {/* استدعاء النموذج الثاني (بيانات العمل) */}
         <div className="col-md-4">
-          {" "}
-          {/* Adjusted width for better layout */}
           <WorkDetailes ref={workDetailsRef} />
         </div>
       </div>
-
-      {/* أزرار الإجراءات */}
       <div className="row mt-0">
-        {" "}
-        {/* Adjusted margin for better spacing */}
         <div className="col-12">
           <div className={styles.buttons}>
             <button
