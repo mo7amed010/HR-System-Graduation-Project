@@ -4,6 +4,7 @@ const mongoose = require("mongoose");
 const dotenv = require("dotenv");
 const AppError = require("./Utils/AppError");
 const dashboardRouter = require("./Routers/dashboard");
+const adminRouter = require("./Routers/admin");
 const app = express();
 
 dotenv.config();
@@ -24,6 +25,7 @@ mongoose
   });
 
 app.use("/dashboard", dashboardRouter);
+app.use("/admin", adminRouter);
 
 app.use(function (req, res, next) {
   next(new AppError(404, "Route not found"));

@@ -1,6 +1,7 @@
 import { BrowserRouter, Route, Routes } from 'react-router'
 import NotFound from './pages/NotFound'
 import Header from './components/Header'
+import AddAdmin from './pages/AddAdmin'
 
 function App() {
 
@@ -10,7 +11,7 @@ function App() {
           <Header/>
         <div className='container'>
           <Routes>
-            {/* <Route path='' element={}/> */}
+            <Route path='/add-admin' element={<AddAdmin/>}/>
             <Route path='*' element={<NotFound/>}/>
           </Routes>
         </div>
