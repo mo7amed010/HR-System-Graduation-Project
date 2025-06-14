@@ -23,7 +23,7 @@ mongoose
     console.log(err);
   });
 
-app.use("/dashboard", dashboardRouter);
+// app.use("/dashboard", dashboardRouter);
 app.use("/employee", dashboardRouter);
 
 app.use(function (req, res, next) {
