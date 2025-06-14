@@ -1,10 +1,13 @@
+
 const mongoose = require("mongoose");
 
 const departmentSchema = new mongoose.Schema({
   name: {
     type: String,
-    required: true,
+    required: [true, "Department name is required"],
+    trim: true,
   },
 });
-const departmentModel = mongoose.model("department", departmentSchema);
-module.exports = departmentModel;
+
+const department = mongoose.model("department", departmentSchema);
+module.exports = department;
