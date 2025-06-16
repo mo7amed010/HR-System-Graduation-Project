@@ -1,6 +1,6 @@
 const mongoose = require("mongoose");
 
-const employeeSechma = mongoose.Schema(
+const employeeScehma = mongoose.Schema(
   {
     name: {
       type: String,
@@ -22,7 +22,7 @@ const employeeSechma = mongoose.Schema(
     },
     gender: {
       type: String,
-      enum: ["user", "seller"],
+      enum: ["male", "female"],
       required: [true, "Gender is required"],
     },
     nationality: {
@@ -55,16 +55,18 @@ const employeeSechma = mongoose.Schema(
       required: [true, "Salary is required"],
     },
     checkIn: {
-      type: Date,
+      type: String,
       required: [true, "Clock in is required"],
+      match: [/^([01]\d|2[0-3]):([0-5]\d)$/, "Invalid time format (HH:mm)"],
     },
     checkOut: {
-      type: Date,
+      type: String,
       required: [true, "Clock out is required"],
+      match: [/^([01]\d|2[0-3]):([0-5]\d)$/, "Invalid time format (HH:mm)"],
     },
   },
   { timestamps: true }
 );
 
-const employeeModel = mongoose.model("employee", employeeSechma);
+const employeeModel = mongoose.model("employee", employeeScehma);
 module.exports = employeeModel;

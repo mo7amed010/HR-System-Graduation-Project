@@ -8,7 +8,6 @@ const weeklyHolidaysSchema = new mongoose.Schema(
     },
     offDay2: {
       type: String,
-      required: [true, "Day of week is required"],
     },
   },
   { timestamps: true }
