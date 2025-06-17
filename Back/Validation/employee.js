@@ -69,12 +69,14 @@ const employeeSchema = Joi.object({
 
   checkIn: Joi.string().required().messages({
     "any.required": "وقت الحضور مطلوب",
-    "string.empty": "وقت الحضور مطلوب"
+    "string.empty": "وقت الحضور مطلوب",
+    "string.pattern.base": "يجب أن يكون وقت الانصراف بتنسيق ساعة:دقيقة (مثال: 09:00)"
   }),
 
   checkOut: Joi.string().required().messages({
     "any.required": "وقت الانصراف مطلوب",
-    "string.empty": "وقت الانصراف مطلوب"
+    "string.empty": "وقت الانصراف مطلوب",
+    "string.pattern.base": "يجب أن يكون وقت الانصراف بتنسيق ساعة:دقيقة (مثال: 17:00)"
   }),
 });
 

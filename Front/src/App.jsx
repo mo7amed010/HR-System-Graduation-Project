@@ -1,8 +1,10 @@
 import { BrowserRouter, Route, Routes } from "react-router";
 import NotFound from "./pages/NotFound";
 import Header from "./components/Header";
-import AddEmployee from "./pages/AddEmployee/AddEmployee";
-import WorkDetailes from "./pages/WorkDetailes/WorkDetailes";
+import AddEmployee from "./pages/AddEmployee/EmployeeDetails/EmployeeDetails";
+import ShowEmployee from "./pages/ShowEmployee/ShowEmployee";
+import Setting from "./pages/Setting/Setting";
+
 
 function App() {
   return (
@@ -14,7 +16,9 @@ function App() {
             {/* <Route path='' element={}/> */}
             <Route path="*" element={<NotFound />} />
             <Route path="/add" element={<AddEmployee />} />
-            <Route path="/work" element={<WorkDetailes />} />
+            <Route path="/add/:id" element={<AddEmployee />} />
+            <Route path="/show" element={<ShowEmployee />} />
+            <Route path="/setting" element={<Setting />} />
           </Routes>
         </div>
       </BrowserRouter>
