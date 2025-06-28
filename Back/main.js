@@ -6,6 +6,7 @@ const AppError = require("./Utils/AppError");
 const dashboardRouter = require("./Routers/dashboard");
 const employeeRouter = require("./Routers/employee");
 const departmentRouter = require("./Routers/departmentRouter");
+const genralSettingRouter = require("./Routers/genralSetting");
 const app = express();
 
 dotenv.config();
@@ -28,6 +29,7 @@ mongoose
 // app.use("/dashboard", dashboardRouter);
 app.use("/employee",employeeRouter);
 app.use("/api/departments",departmentRouter);
+app.use("/generalSetting", genralSettingRouter);
 
 app.use(function (req, res, next) {
   next(new AppError(404, "Route not found"));
