@@ -7,6 +7,10 @@ const AppError = require("./Utils/AppError");
 
 // const dashboardRouter = require("./routes/dashboardRouter");
 const departmentRouter = require("./Routers/departmentRouter");
+const employeeRouter = require("./Routers/employee");
+const attendanceRoutes = require("./Routers/attendance.routes");
+const salaryAdjustmentsRoutes = require("./Routers/salaryAdjustments.routes");
+
 
 dotenv.config();
 
@@ -26,6 +30,12 @@ mongoose
 
 // app.use("/dashboard", dashboardRouter);
 app.use("/api/departments", departmentRouter);
+app.use("/employee", employeeRouter);
+
+//attendance routes
+app.use("/api/attendance", attendanceRoutes);
+app.use("/api/salary-adjustments", salaryAdjustmentsRoutes);
+
 
 app.use((req, res, next) => {
   next(new AppError(404, "Route not found"));
