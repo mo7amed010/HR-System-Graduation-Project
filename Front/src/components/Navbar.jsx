@@ -93,5 +93,6 @@ const Navbar = ({ isLoggedIn = false, onLogin, onLogout }) => {
     </nav>
   );
 };
+ 
 
 export default Navbar;

@@ -4,6 +4,9 @@ const mongoose = require("mongoose");
 const dotenv = require("dotenv");
 const AppError = require("./Utils/AppError");
 const dashboardRouter = require("./Routers/dashboard");
+const attendanceRoutes = require("./Routers/attendance.routes");
+const salaryAdjustmentsRoutes = require("./Routers/salaryAdjustments.routes");
+
 const app = express();
 
 dotenv.config();
@@ -25,12 +28,19 @@ mongoose
 
 app.use("/dashboard", dashboardRouter);
 
-app.use(function (req, res, next) {
-  next(new AppError(404, "Route not found"));
-});
+//attendance routes
+app.use("/api/attendance", attendanceRoutes);
+app.use("/api/salary-adjustments", salaryAdjustmentsRoutes);
 
 app.use((err, req, res, next) => {
   res
     .status(err.statusCode || 500)
     .json({ status: "fail", message: err.message || "ops, something wrong" });
+});
+
+app.use((req, res, next) => {
+  res.status(404).json({
+    status: "fail",
+    message: "Route not found",
+  });
 });
