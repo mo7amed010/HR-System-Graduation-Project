@@ -1,0 +1,326 @@
+/* Existing styles remain unchanged, with responsive enhancements */
+
+/* Container */
+.container {
+  margin: 30px auto;
+  padding: 15px;
+  direction: rtl;
+  background-color: #fff;
+  border-radius: 5px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  width: 85%;
+  max-width: 1200px; /* Added to prevent overly wide containers on large screens */
+}
+
+/* Modal styles */
+.modalOverlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+  padding: 10px; /* Added padding for small screens */
+}
+
+.modal {
+  background: #fff;
+  border-radius: 8px;
+  padding: 20px;
+  width: 100%;
+  max-width: 500px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  max-height: 90vh; /* Prevent modal from exceeding viewport height */
+  overflow-y: auto; /* Allow scrolling within modal if content overflows */
+}
+
+.modal h2 {
+  text-align: center;
+  margin-bottom: 20px;
+  color: #047fcc;
+  font-size: clamp(1.2rem, 5vw, 1.5rem); /* Responsive font size */
+}
+
+.formGroup {
+  margin-bottom: 15px;
+}
+
+.formGroup label {
+  display: block;
+  margin-bottom: 5px;
+  font-weight: bold;
+  text-align: right;
+  font-size: clamp(0.9rem, 4vw, 1rem); /* Responsive label size */
+}
+
+.formInput {
+  width: 100%;
+  padding: 8px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  font-size: clamp(0.85rem, 4vw, 0.9rem); /* Responsive input font size */
+  text-align: right;
+  box-sizing: border-box; /* Ensure padding doesn't affect width */
+}
+
+.formInput:focus {
+  outline: none;
+  border-color: #069ed3;
+  box-shadow: 0 0 5px rgba(6, 158, 211, 0.5);
+}
+
+.error {
+  color: #d32f2f;
+  font-size: clamp(0.7rem, 3.5vw, 0.75rem); /* Responsive error message size */
+  margin-top: 5px;
+  text-align: right;
+}
+
+.modalActions {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 20px;
+  gap: 10px; /* Added for better spacing on small screens */
+  flex-wrap: wrap; /* Allow buttons to wrap on small screens */
+}
+
+.btnSave,
+.btnCancel {
+  background-color: #069ed3;
+  color: white;
+  border: none;
+  padding: 8px 16px;
+  border-radius: 8px;
+  font-size: clamp(0.85rem, 4vw, 0.9rem); /* Responsive button font size */
+  cursor: pointer;
+  flex: 1; /* Make buttons take equal space */
+  min-width: 100px; /* Minimum width for touch targets */
+}
+
+.btnSave:hover {
+  background-color: #035d98;
+}
+
+.btnSave:disabled {
+  background-color: #ccc;
+  cursor: not-allowed;
+}
+
+.btnCancel {
+  background-color: #dc3545;
+}
+
+.btnCancel:hover {
+  background-color: #c82333;
+}
+
+.mainHeader {
+  width: 100%;
+  background: #047fcc;
+  color: white;
+  padding: 0.8rem 0;
+  text-align: center;
+  margin-bottom: 1.5rem;
+  border-radius: 0.5rem;
+  font-size: clamp(1.2rem, 5vw, 1.5rem); /* Responsive header font size */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+}
+
+.table {
+  width: 100%;
+  border-collapse: collapse;
+  background-color: #f9f9f9;
+  border-radius: 5px;
+  overflow: hidden;
+}
+
+.table th,
+.table td {
+  padding: 8px;
+  font-size: clamp(0.85rem, 4vw, 0.9rem); /* Responsive table text */
+  text-align: center;
+  border-bottom: 1px solid #ddd;
+}
+
+.table th {
+  background-color: #069ed3;
+  color: white;
+}
+
+.btnDelete,
+.btnEdit {
+  padding: 4px 8px;
+  font-size: clamp(0.8rem, 3.5vw, 0.85rem); /* Responsive button font size */
+  border-radius: 8px;
+  border: none;
+  cursor: pointer;
+  margin-left: 4px;
+  color: white;
+  min-width: 60px; /* Minimum width for touch targets */
+}
+
+.btnDelete {
+  background-color: #dc3545;
+}
+
+.btnDelete:hover {
+  background-color: #c82333;
+}
+
+.btnEdit {
+  background-color: #ffa500;
+}
+
+.btnEdit:hover {
+  background-color: #7c5409;
+}
+
+.btnAdd {
+  background-color: #069ed3;
+  color: white;
+  border: none;
+  padding: 8px 16px;
+  margin: 10px 0 20px;
+  border-radius: 8px;
+  font-size: clamp(0.85rem, 4vw, 0.9rem); /* Responsive button font size */
+  gap: 6px;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.btnAdd:hover {
+  background-color: #035d98;
+}
+
+.iconAdd {
+  font-size: clamp(0.9rem, 4vw, 1rem); /* Responsive icon size */
+}
+
+.searchContainer {
+  margin-bottom: 20px;
+}
+
+.searchInput {
+  width: 100%;
+  padding: 8px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  font-size: clamp(0.85rem, 4vw, 0.9rem); /* Responsive input font size */
+  text-align: right;
+  box-sizing: border-box; /* Ensure padding doesn't affect width */
+}
+
+.searchInput:focus {
+  outline: none;
+  border-color: #069ed3;
+  box-shadow: 0 0 5px rgba(6, 158, 211, 0.5);
+}
+
+/* Media Queries for Responsiveness */
+@media (max-width: 768px) {
+  .container {
+    width: 95%; /* Wider container on smaller screens */
+    padding: 10px;
+    margin: 15px auto;
+  }
+
+  .table {
+    display: block;
+    overflow-x: auto; /* Enable horizontal scrolling for table */
+    white-space: nowrap; /* Prevent text wrapping */
+  }
+
+  .table th,
+  .table td {
+    min-width: 100px; /* Ensure columns have minimum width */
+    padding: 6px; /* Reduce padding for smaller screens */
+    font-size: clamp(0.75rem, 3.5vw, 0.8rem);
+  }
+
+  .modal {
+    max-width: 90%; /* Modal takes more width on small screens */
+    padding: 15px;
+  }
+
+  .modalActions {
+    flex-direction: column; /* Stack buttons vertically */
+    gap: 10px;
+  }
+
+  .btnSave,
+  .btnCancel {
+    width: 100%; /* Full-width buttons */
+    padding: 10px;
+    min-width: unset; /* Remove min-width for full flexibility */
+  }
+
+  .btnAdd {
+    width: 100%; /* Full-width add button */
+    padding: 10px;
+  }
+
+  .btnDelete,
+  .btnEdit {
+    padding: 6px 10px;
+    font-size: clamp(0.75rem, 3.5vw, 0.8rem);
+    margin: 2px; /* Adjust margin for touch targets */
+  }
+
+  .mainHeader {
+    padding: 0.6rem 0;
+    font-size: clamp(1rem, 4.5vw, 1.2rem);
+  }
+}
+
+@media (max-width: 480px) {
+  .container {
+    width: 100%; /* Full width on very small screens */
+    padding: 8px;
+  }
+
+  .modal {
+    max-width: 95%;
+    padding: 10px;
+  }
+
+  .modal h2 {
+    font-size: clamp(1rem, 4.5vw, 1.2rem);
+  }
+
+  .formGroup label {
+    font-size: clamp(0.8rem, 4vw, 0.9rem);
+  }
+
+  .formInput {
+    font-size: clamp(0.75rem, 3.5vw, 0.8rem);
+    padding: 6px;
+  }
+
+  .error {
+    font-size: clamp(0.65rem, 3vw, 0.7rem);
+  }
+
+  .table th,
+  .table td {
+    font-size: clamp(0.7rem, 3vw, 0.75rem);
+    padding: 5px;
+  }
+
+  .btnAdd {
+    font-size: clamp(0.75rem, 3.5vw, 0.8rem);
+    padding: 8px;
+  }
+
+  .iconAdd {
+    font-size: clamp(0.8rem, 3.5vw, 0.9rem);
+  }
+}
