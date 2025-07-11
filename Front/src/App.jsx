@@ -12,9 +12,7 @@ import Dashboard from "./components/Dashboard";
 import AddEmployee from "./pages/AddEmployee/EmployeeDetails/EmployeeDetails";
 import ShowEmployee from "./pages/ShowEmployee/ShowEmployee";
 import Setting from "./pages/Setting/Setting";
-import ShowAdmin from "./pages/ShowAdmin/ShowAdmin";
-
-
+import EmployeeSummaryPage from "./pages/EmployeeSummaryPage";
 
 function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -68,9 +66,8 @@ function App() {
           <Route path="/add" element={<AddEmployee />} />
           <Route path="/add/:id" element={<AddEmployee />} />
           <Route path="/show" element={<ShowEmployee />} />
-          <Route path="/showadmin" element={<ShowAdmin />} />
           <Route path="/setting" element={<Setting />} />
-       
+          <Route path="/summary/:id" element={<EmployeeSummaryPage />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
       </div>

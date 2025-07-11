@@ -1,0 +1,137 @@
+.container {
+  font-size: 0.8em;
+  direction: rtl;
+  margin-top: 0.5rem;
+}
+.card {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  border-radius: 0.2rem;
+  overflow: hidden;
+}
+.cardBody {
+  flex: 1;
+  padding: 0.2rem;
+}
+.cardTitle {
+  background: #047FCC;
+  color: white;
+  padding: 0.8rem 1rem;
+  margin-bottom: 1rem;
+  font-size: 1.2em;
+  text-align: right;
+ border-radius: 0.5rem;
+  display: flex;
+  justify-content: center;
+  flex-direction: row-reverse;
+}
+.cardTitle svg {
+  margin-right: 0.5rem;
+}
+.formGroup {
+  margin-bottom: 1rem;
+  position: relative;
+}
+.formLabel {
+  display: block;
+  font-size: 1.1em;
+  margin-bottom: 0.3rem;
+ background-color: #F8FAFB;
+}
+.inputIcon {
+  display: inline-block;
+  margin-left: 0.5rem;
+  color: #555;
+  vertical-align: middle;
+}
+.formControl {
+  width: 100%;
+  padding: 0.5rem 1rem;
+  border: 1px solid #ddd;
+  border-radius: 0.25rem;
+  font-size: 1em;
+  height: auto;
+  box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.1);
+  transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+  text-align: right;
+  background-color: #f9f9f9;
+}
+.formControl:focus {
+  border-color: #56595c;
+  outline: 0;
+  box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
+}
+.formSelect {
+  width: 100%;
+  border: 1px solid #ddd;
+  border-radius: 0.25rem;
+  font-size: 1em;
+  text-align: right;
+  background-color: #f9f9f9;
+  background-position: 10px center;  
+}
+.formSelect:focus {
+  border-color: #56595c;
+  outline: 0;
+  box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
+}
+
+.error {
+  color: #dc3545;
+  font-size: 0.8rem;
+  margin-top: 0.25rem;
+}
+
+.buttons {
+  padding: 1rem;
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+  margin-top: 0.5rem;
+}
+.btn:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+}
+.btnSuccess {
+  background-color:#047FCC;
+  color: white;
+  padding: 0.5rem 1rem;
+  border: none;
+  border-radius: 0.25rem;
+}
+
+.mainHeader {
+   background: #069ED3;
+  color: white;
+  padding: 1rem 0;
+  text-align: center;
+  margin-bottom: 2rem;
+  border-radius: 0.5rem;
+  font-size: 2em;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.8rem;
+}
+
+.formContainer {
+  background-color: #f9f9f9;
+  padding: 15px;
+  border-radius: 5px;
+}
+.formWrapper {
+  background-color: #f9f9f9;
+  padding: 30px;
+  border-radius: 10px;
+  
+}
+.outerWrapper{
+  background-color: #ffffff;
+  padding: 30px;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+  
+}
+

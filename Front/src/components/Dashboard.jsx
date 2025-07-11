@@ -1,13 +1,24 @@
 import React, { useState } from "react";
-import { Users, Calendar, FileText, Clock, UserPlus, Settings } from "lucide-react";
-
+import {
+  Users,
+  Calendar,
+  FileText,
+  Clock,
+  UserPlus,
+  Settings,
+} from "lucide-react";
+import AddAdmin from "../pages/AddAdmin";
 import HolidaysPage from "../pages/officialholidaysPage";
 import ShowEmployee from "../pages/ShowEmployee/ShowEmployee";
-import ShowAdmin from "../pages/ShowAdmin/ShowAdmin";
 import { FaPlaneDeparture } from "react-icons/fa";
 import Departments from "../pages/Departments";
 import EmployeeDetails from "../pages/AddEmployee/EmployeeDetails/EmployeeDetails";
 import Setting from "../pages/Setting/Setting";
+import Attendance from "../pages/Attendance";
+import ShowAdmin from "../pages/ShowAdmin/ShowAdmin";
+import DynamicSalaryPage from "../pages/DynamicSalary/DynamicSalaryPage";
+import EmployeeSummaryPage from "../pages/EmployeeSummaryPage";
+import ChatBot from "./ChatBot";
 
 const Dashboard = () => {
   const [activeTab, setActiveTab] = useState("attendance");
@@ -18,11 +29,11 @@ const Dashboard = () => {
     { id: "leaves", label: "الإجازات الرسمية", icon: Calendar },
     { id: "payroll", label: "تقارير الرواتب", icon: FileText },
     { id: "employees", label: "إدارة الموظفين", icon: Users },
-    { id: "admins", label: "المسؤول", icon: Users },
     { id: "addEmployee", label: "إضافة موظف", icon: UserPlus },
-
+    { id: "add-user", label: "المشرفون", icon: UserPlus },
     { id: "setting", label: "الاعدادت العامه ", icon: Settings },
     { id: "departments", label: "الأقسام", icon: FaPlaneDeparture },
+    { id: "summary", label: "ملخص الموظفين", icon: FileText },
   ];
 
   const contentMap = {
@@ -35,8 +46,8 @@ const Dashboard = () => {
       description: "إضافة موظفين جدد وتعيين الصلاحيات المناسبة",
     },
     departments: { title: "إدارة الأقسام" },
+    summary: { title: "ملخص الموظفين" },
   };
-
 
   // const renderTabContent = () => {
   //   const content = contentMap[activeTab];
@@ -80,16 +91,6 @@ const Dashboard = () => {
   //     </div>
   //   );
   // };
-  const handleAddAdmin = () => {
-    setActiveTab("add-user");
-  };
-
-  const handleEditAdmin = (id) => {
-    setEditEmployeeId(id); // يمكن إعادة تسمية هذه الحالة إلى setEditAdminId لتجنب الالتباس
-    setActiveTab("add-user");
-  };
-
-
 
   const handleAddEmployee = () => {
     setEditEmployeeId(null);
@@ -103,8 +104,12 @@ const Dashboard = () => {
 
   const renderTabContent = () => {
     switch (activeTab) {
+      case "attendance":
+        return <Attendance />;
       case "leaves":
         return <HolidaysPage />;
+      case "payroll":
+        return <DynamicSalaryPage />;
       case "employees":
         return (
           <ShowEmployee
@@ -112,16 +117,12 @@ const Dashboard = () => {
             onEditEmployee={handleEditEmployee}
           />
         );
-      case "admins":
-        return (
-          <ShowAdmin
-            onAddAdminClick={handleAddAdmin}
-            onEditAdmin={handleEditAdmin}
-          />
-        );
-     
+      case "add-user":
+        return <ShowAdmin />;
       case "departments":
         return <Departments />;
+      case "summary":
+        return <EmployeeSummaryPage />;
       case "addEmployee":
         return (
           <EmployeeDetails
@@ -165,6 +166,7 @@ const Dashboard = () => {
           </div>
         </div>
       </div>
+      <ChatBot />
     </div>
   );
 };
