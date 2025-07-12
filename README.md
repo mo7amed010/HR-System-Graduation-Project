@@ -28,3 +28,4 @@
 
 ### Team Contributions
 - Fatma: Developed the Home Page, Landing Page, and Attendance Backend logic.
+- Aya: Developed the Official Holidays module , Employee Salary Management frontend.
