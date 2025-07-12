@@ -1,4 +1,4 @@
-const AttendanceModel = require("../Models/attendance");
+ const AttendanceModel = require("../Models/attendance");
 const EmployeeModel = require("../Models/employee");
 const WeeklyModel = require("../Models/GeneralSitting");
 const SalaryAdjustments = require("../Models/salaryAdjustments");
@@ -16,6 +16,8 @@ const createAttendance = async (req, res) => {
     }
     const { employeeId, date, checkIn, checkOut } = req.body;
 
+  
+
     // prevent duplication
     const startOfDay = dayjs(date).startOf("day").toDate();
     const endOfDay = dayjs(date).endOf("day").toDate();
@@ -27,7 +29,7 @@ const createAttendance = async (req, res) => {
 
     if (existing) {
       return res.status(400).json({
-        message: "Attendance already recorded for this employee on this date.",
+        message: "تم تسجيل حضور هذا الموظف مسبقًا في هذا التاريخ",
       });
     }
 
@@ -90,7 +92,7 @@ const createAttendance = async (req, res) => {
       });
     }
 
-    // if not holiday → continue as normal
+    // if not holiday , continue as normal
     const lateMinutes = Math.max(
       0,
       dayjs(actualCheckIn).diff(dayjs(officialCheckIn), "minute")
@@ -166,26 +168,43 @@ const createAttendance = async (req, res) => {
   }
 };
 
-// show attendance (filteration: date, employeeId)
+
+ 
+
+//  get attendance
+
 const getAttendance = async (req, res) => {
   try {
-    const { date, employeeId } = req.query;
+    const { fromDate, toDate, employeeId, employeeName, departmentId } = req.query;
 
     let query = {};
-    if (date) {
-      const start = new Date(date);
-      const end = new Date(date);
-      end.setDate(end.getDate() + 1);
-      query.date = { $gte: start, $lt: end };
+
+    if (fromDate && toDate) {
+      const start = dayjs(fromDate).startOf("day").toDate();
+      const end = dayjs(toDate).endOf("day").toDate();
+      query.date = { $gte: start, $lte: end };
     }
+
     if (employeeId) {
       query.employeeId = employeeId;
     }
 
-    const attendanceRecords = await AttendanceModel.find(query).populate(
-      "employeeId",
-      "name"
-    );
+    let attendanceRecords = await AttendanceModel.find(query).populate({
+      path: "employeeId",
+      match: {
+        ...(employeeName && {
+          name: { $regex: employeeName, $options: "i" }, 
+        }),
+        ...(departmentId && { department: departmentId }),
+      },
+      select: "name department",
+      populate: {
+        path: "department",
+        select: "name",
+      },
+    });
+
+    attendanceRecords = attendanceRecords.filter((record) => record.employeeId);
 
     res.status(200).json(attendanceRecords);
   } catch (err) {
