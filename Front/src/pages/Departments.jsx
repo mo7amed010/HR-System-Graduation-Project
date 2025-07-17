@@ -3,6 +3,7 @@ import axios from "../apis/config";
 import { FaEdit, FaTrash } from "react-icons/fa";
 import Swal from "sweetalert2";
 import { useForm } from "react-hook-form";
+import styles from "./Departments.module.css";
 
 function Departments() {
   const [departments, setDepartments] = useState([]);
@@ -83,155 +84,83 @@ function Departments() {
   };
 
   return (
-    <div style={{ direction: "rtl", padding: "20px", margin: "20px" }}>
-      <div
-        style={{
-          display: "flex",
-          justifyContent: "space-between",
-          alignItems: "center",
-          marginBottom: "20px",
-        }}
-      >
-        <h1 style={{ color: "#069ED3", margin: "0" }}>الأقسام</h1>
+    <div className={styles.container} dir="rtl">
+      <div className={styles.headerWrapper}>
+        <h1 className={styles.mainHeader}>الأقسام</h1>
         <button
           onClick={() => {
             setIsEditing(false);
             reset({ name: "" });
             setShowModal(true);
           }}
-          style={{
-            backgroundColor: "#047FCC",
-            color: "white",
-            padding: "10px 20px",
-            border: "none",
-            borderRadius: "5px",
-            cursor: "pointer",
-          }}
+          className={styles.addButton}
         >
           إضافة قسم
         </button>
       </div>
 
-      <table
-        style={{
-          width: "100%",
-          borderCollapse: "collapse",
-          textAlign: "center",
-          fontSize: "1.1rem",
-        }}
-      >
-        <thead style={{ backgroundColor: "#047FCC", color: "white" }}>
-          <tr>
-            <th style={{ padding: "10px" }}>رقم</th>
-            <th style={{ padding: "10px" }}>القسم</th>
-            <th style={{ padding: "10px" }}>إجراءات</th>
-          </tr>
-        </thead>
-        <tbody>
-          {departments?.map((dep, idx) => (
-            <tr
-              key={dep._id}
-              style={{ backgroundColor: idx % 2 === 0 ? "#E6E6E6" : "#F5F5F5" }}
-            >
-              <td style={{ padding: "10px" }}>{idx + 1}</td>
-              <td style={{ padding: "10px" }}>{dep.name}</td>
-              <td style={{ padding: "10px" }}>
-                <button
-                  onClick={() => handleEdit(dep)}
-                  style={{
-                    background: "none",
-                    color: "#FFA500",
-                    border: "none",
-                    marginLeft: "10px",
-                    cursor: "pointer",
-                  }}
-                >
-                  <FaEdit size={20} />
-                </button>
-                <button
-                  onClick={() => handleDelete(dep._id)}
-                  style={{
-                    background: "none",
-                    color: "red",
-                    border: "none",
-                    cursor: "pointer",
-                  }}
-                >
-                  <FaTrash size={20} />
-                </button>
-              </td>
+      <div className={styles.outerWrapper}>
+        <table className={styles.table}>
+          <thead className={styles.tableHead}>
+            <tr>
+              <th className={styles.tableCell}>رقم</th>
+              <th className={styles.tableCell}>القسم</th>
+              <th className={styles.tableCell}>إجراءات</th>
             </tr>
-          ))}
-        </tbody>
-      </table>
+          </thead>
+          <tbody>
+            {departments?.map((dep, idx) => (
+              <tr
+                key={dep._id}
+                className={idx % 2 === 0 ? styles.tableRowEven : styles.tableRowOdd}
+              >
+                <td className={styles.tableCell}>{idx + 1}</td>
+                <td className={styles.tableCell}>{dep.name}</td>
+                <td className={styles.tableCell}>
+                  <button
+                    onClick={() => handleEdit(dep)}
+                    className={styles.btnEdit}
+                  >
+                    <FaEdit /> تعديل
+                  </button>
+                  <button
+                    onClick={() => handleDelete(dep._id)}
+                    className={styles.btnDelete}
+                  >
+                    <FaTrash /> حذف
+                  </button>
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
 
       {showModal && (
-        <div
-          style={{
-            position: "fixed",
-            top: "0",
-            left: "0",
-            width: "100%",
-            height: "100%",
-            background: "rgba(0,0,0,0.5)",
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "center",
-          }}
-        >
-          <div
-            style={{
-              background: "white",
-              padding: "20px",
-              borderRadius: "10px",
-              width: "400px",
-            }}
-          >
+        <div className={styles.modalOverlay}>
+          <div className={styles.modalContent}>
             <h2>{isEditing ? "تعديل القسم" : "إضافة قسم"}</h2>
             <form onSubmit={handleSubmit(onSubmit)}>
               <input
                 {...register("name", { required: "اسم القسم مطلوب" })}
                 placeholder="اكتب اسم القسم"
-                style={{
-                  padding: "10px",
-                  border: "1px solid #069ED3",
-                  borderRadius: "5px",
-                  width: "100%",
-                }}
+                className={styles.formControl}
               />
               {errors.name && (
-                <span style={{ color: "red" }}>{errors.name.message}</span>
+                <span className={styles.error}>{errors.name.message}</span>
               )}
 
-              <div
-                style={{
-                  marginTop: "20px",
-                  display: "flex",
-                  justifyContent: "space-between",
-                }}
-              >
+              <div className={styles.buttons}>
                 <button
                   type="submit"
-                  style={{
-                    backgroundColor: isEditing ? "#FFA500" : "#069ED3",
-                    color: "white",
-                    padding: "10px 20px",
-                    border: "none",
-                    borderRadius: "5px",
-                    cursor: "pointer",
-                  }}
+                  className={isEditing ? styles.btnEdit : styles.btnAdd}
                 >
                   {isEditing ? "تعديل" : "إضافة"}
                 </button>
 
                 <button
                   onClick={() => setShowModal(false)}
-                  style={{
-                    background: "none",
-                    color: "red",
-                    border: "none",
-                    cursor: "pointer",
-                  }}
+                  className={styles.btnCancel}
                   type="button"
                 >
                   إلغاء

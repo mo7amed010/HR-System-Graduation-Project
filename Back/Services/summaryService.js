@@ -41,9 +41,17 @@ class SummaryService {
         date: { $gte: startOfMonth, $lte: endOfMonth }
       }).lean();
       // Build a set of all holiday dates (as YYYY-MM-DD strings)
-      const officialHolidayDates = new Set(
-        holidays.map(h => dayjs(h.date).format("YYYY-MM-DD"))
-      );
+     // Build a set of all holiday dates (as YYYY-MM-DD strings)
+const officialHolidayDates = new Set();
+
+holidays.forEach((h) => {
+  const start = dayjs(h.date);
+  const duration = h.duration || 1;
+
+  for (let i = 0; i < duration; i++) {
+    const day = start.add(i, 'day').format("YYYY-MM-DD");
+    officialHolidayDates.add(day);}
+});
 
       // Get attendance data for the month
       const attendanceData = await this.getAttendanceStats(
@@ -103,12 +111,13 @@ class SummaryService {
     // Calculate total working days (excluding weekends and holidays)
     const totalDays = this.calculateWorkingDays(startDate, effectiveEndDate, weeklyHolidays, officialHolidayDates);
     const presentDays = attendanceRecords.length;
-    const absentDays = totalDays - presentDays;
+    const absentDays = Math.max(totalDays - presentDays,0);
     const lateDays = attendanceRecords.filter(record => record.lateMinutes > 0).length;
     const totalLateMinutes = attendanceRecords.reduce((sum, record) => sum + (record.lateMinutes || 0), 0);
     const totalOvertimeMinutes = attendanceRecords.reduce((sum, record) => sum + (record.overtimeMinutes || 0), 0);
 
-    const attendancePercentage = totalDays > 0 ? Math.round((presentDays / totalDays) * 100) : 0;
+   const attendancePercentage = totalDays > 0
+  ? Math.min(Math.round((presentDays / totalDays) * 100),100):0;
 
     return {
       totalDays,

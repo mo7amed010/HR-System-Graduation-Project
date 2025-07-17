@@ -4,45 +4,6 @@ const userModel = require("../Models/user");
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 
-exports.registerUser = CatchAsync(async (req, res) => {
-  const { name ,username, email, password } = req.body;
-
-  // Basic validation
-  if (!username || !email || !password) {
-    throw new AppError(400, "Username, email and password are required");
-  }
-
-  // Check if the email already exists
-  const existingUser = await userModel.findOne({ email });
-  if (existingUser) {
-    throw new AppError(400, "Email already exists");
-  }
-
-  // Check if the username already exists
-  const existingUsername = await userModel.findOne({ username });
-  if (existingUsername) {
-    throw new AppError(400, "Username already exists");
-  }
-
-  // Create new user - password will be hashed by the pre-save hook
-  const user = await userModel.create({
-    name,
-    username,
-    email,
-    password, // No need to hash here - the schema pre-save hook will do it
-  });
-
-  // Send response without sending the password
-  res.status(201).json({
-    status: "success",
-    data: {
-      name:user.name,
-      username: user.username,
-      email: user.email,
-    },
-  });
-});
-
 exports.login = async (req, res, next) => {
   let { email, password } = req.body;
   if (!email || !password) {
@@ -63,7 +24,16 @@ exports.login = async (req, res, next) => {
     process.env.SECRET_KEY
   );
   if (token) {
-    return res.json({ status: "success", token });
+    return res.json({
+      status: "success",
+      token,
+      user: {
+        id: user._id,
+        name: user.name,
+        username: user.username,
+        email: user.email,
+      },
+    });
   } else {
     console.log(err);
     next(new AppError(500, "Error logging in"));

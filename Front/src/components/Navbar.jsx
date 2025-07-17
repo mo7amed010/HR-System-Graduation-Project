@@ -6,7 +6,8 @@ const Navbar = ({ isLoggedIn = false, onLogin, onLogout }) => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const navigate = useNavigate();
-
+ 
+  const user = JSON.parse(localStorage.getItem("user"));
   if (isLoggedIn) {
     return (
       <nav className="navbar navbar-expand-lg navbar-logged-in">
@@ -39,15 +40,17 @@ const Navbar = ({ isLoggedIn = false, onLogin, onLogout }) => {
                   style={{ right: 0, left: "auto" }}
                 >
                   <div className="px-3 py-2 border-bottom">
-                    <div className="fw-semibold">فاطمة</div>
-                    <div className="text-muted">مسئول الموارد البشرية</div>
+                    <div className="fw-semibold">{user?.name || "مستخدم"}</div>
+                    <div className="text-muted">{user?.role || "مسئول الموارد البشرية"}</div>
                   </div>
                   <button
                     className="dropdown-item text-end "
                     onClick={() => {
+                      localStorage.removeItem("user");
+                      localStorage.removeItem("token");
                       setIsDropdownOpen(false);
                       if (onLogout) onLogout();
-                      navigate("/login");
+                      navigate("/");
                     }}
                   >
                     <LogOut size={16} className="me-2" />

@@ -5,7 +5,9 @@ const WeeklyHoliday = require("../Models/GeneralSitting");
 const OfficialHoliday = require("../Models/officialHolidays");
 const Attendance = require("../Models/attendance");
 const SalaryAdjustments = require("../Models/salaryAdjustments");
-
+const bcrypt = require("bcrypt");
+const User = require("../Models/user");
+const Admin = require("../Models/admin");
 const dayjs = require("dayjs");
 
 mongoose
@@ -40,16 +42,16 @@ async function seedData() {
     });
 
     //  Official holidays
-    await OfficialHoliday.insertMany([
-      { name: "Eid Fitr", date: new Date("2025-04-01") },
-      { name: "Eid Adha", date: new Date("2025-06-16") },
-      { name: "July Revolution", date: new Date("2025-07-23") },
-    ]);
+    // await OfficialHoliday.insertMany([
+    //   { name: "Eid Fitr", date: new Date("2025-04-01") },
+    //   { name: "Eid Adha", date: new Date("2025-06-16") },
+    //   { name: "July Revolution", date: new Date("2025-07-23") },
+    // ]);
 
     //  Add employees
     const employees = await Employee.insertMany([
       {
-        name: "Fatma Ali",
+        name: "Fatma Aliiii",
         address: "Cairo Egypt",
         phone: "01012345678",
         gender: "female",
@@ -64,7 +66,7 @@ async function seedData() {
         checkOut: "17:00",
       },
       {
-        name: "Omar Said",
+        name: "Omar Saiddddd",
         address: "Alexandria Egypt",
         phone: "01098765432",
         gender: "male",
@@ -121,6 +123,16 @@ async function seedData() {
         reason: "Overtime",
       },
     ]);
+    const User = require("../Models/user");
+
+    const newUser = new User({
+      name: "omr",
+      username: "admin",
+      email: "admin@example.com",
+      password: "123456FF",
+    });
+
+    await newUser.save();
 
     console.log("Static data inserted successfully.");
     process.exit();

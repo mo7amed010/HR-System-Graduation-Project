@@ -11,10 +11,11 @@ function Login({ onLogin }) {
 
   const onSubmit = async (data) => {
     try {
-      const response = await axiosInstance.post('/login', data); // عدّل حسب الـ endpoint
+      const response = await axiosInstance.post('/login', data);  
       console.log(response.data);
       if (response.data.token) {
         localStorage.setItem('token', response.data.token);
+        localStorage.setItem('user', JSON.stringify(response.data.user));
         if (onLogin) onLogin();
         Swal.fire({
           icon: 'success',

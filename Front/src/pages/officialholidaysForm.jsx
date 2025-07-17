@@ -1,5 +1,6 @@
 import React from "react";
 import { useForm } from "react-hook-form";
+import Swal from "sweetalert2";
 
 const HolidayForm = ({ onAdd, onUpdate, editHoliday, holidays }) => {
   const {
@@ -25,18 +26,26 @@ const HolidayForm = ({ onAdd, onUpdate, editHoliday, holidays }) => {
   const onSubmit = (data) => {
     data.duration = parseInt(data.duration);
     data.date = data.date.split("T")[0];
-    const isDuplicate = holidays.some(
-      (holiday) =>
-        holiday.name === data.name &&
-        holiday.date === data.date &&
-        holiday.type === data.type &&
-        !editHoliday
-    );
+ const isDuplicate = holidays.some((holiday) => {
+  const holidayDate = holiday.date?.split("T")[0]; // نأخذ فقط YYYY-MM-DD
+  return (
+    holiday.name === data.name &&
+    holiday.type === data.type &&
+    holidayDate === data.date &&
+    !editHoliday
+);
+});
 
-    if (isDuplicate && !editHoliday) {
-      alert("هذه الإجازة موجودة بالفعل!");
-      return;
-    }
+if (isDuplicate && !editHoliday) {
+  Swal.fire({
+    icon: "warning",
+    title: "تنبيه",
+    text: "هذه الإجازة موجودة بالفعل!",
+    confirmButtonText: "حسنًا",
+    confirmButtonColor: "#004080",
+ });
+return;
+}
 
     if (editHoliday) {
       const updatedHoliday = { ...editHoliday, ...data, _id: editHoliday._id };

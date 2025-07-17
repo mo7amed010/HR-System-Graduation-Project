@@ -52,7 +52,7 @@ const calculateDynamicPayroll = CatchAsync(async (req, res, next) => {
   const payrollData = await Promise.all(
     employees.map(async (emp) => {
       const baseSalary = emp.salary || 0;
-      const dailyRate = baseSalary / 30;
+      const dailyRate = baseSalary / 22;
 
       const attendances = await Attendance.find({
         employeeId: emp._id,

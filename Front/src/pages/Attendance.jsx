@@ -120,35 +120,47 @@ function Attendance() {
     });
   };
 
-  const onSubmit = async (data) => {
-    try {
-      if (isEditing) {
-        await axiosInstance.put(`/api/attendance/${editId}`, {
-          checkIn: data.checkIn,
-          checkOut: data.checkOut,
-        });
-        Swal.fire("تم التعديل!", "تم تعديل الحضور بنجاح", "success");
-      } else {
-        await axiosInstance.post("/api/attendance", {
-          employeeId: data.employeeId,
-          checkIn: data.checkIn,
-          checkOut: data.checkOut,
-          date: data.date,
-        });
-        Swal.fire("تمت الإضافة!", "تم إضافة الحضور بنجاح", "success");
-      }
+const onSubmit = async (data) => {
+  const checkInTime = dayjs(`2020-01-01T${data.checkIn}`);
+  const checkOutTime = dayjs(`2020-01-01T${data.checkOut}`);
 
-      setShowModal(false);
-      reset();
-      setIsEditing(false);
-      setEditId(null);
-      fetchAttendance();
-    } catch (err) {
-      console.error("خطأ", err);
-      const msg = err.response?.data?.message;
-      Swal.fire("خطأ", msg || "حدث خطأ أثناء حفظ الحضور", "error");
+  if (checkOutTime.isBefore(checkInTime)) {
+    Swal.fire({
+      title: "خطأ في التوقيت",
+      text: "وقت الانصراف لا يمكن أن يكون قبل وقت الدخول",
+      icon: "error",
+    });
+    return;
+  }
+
+  try {
+    if (isEditing) {
+      await axiosInstance.put(`/api/attendance/${editId}`, {
+        checkIn: data.checkIn,
+        checkOut: data.checkOut,
+      });
+      Swal.fire("تم التعديل!", "تم تعديل الحضور بنجاح", "success");
+    } else {
+      await axiosInstance.post("/api/attendance", {
+        employeeId: data.employeeId,
+        checkIn: data.checkIn,
+        checkOut: data.checkOut,
+        date: data.date,
+      });
+      Swal.fire("تمت الإضافة!", "تم إضافة الحضور بنجاح", "success");
     }
-  };
+
+    setShowModal(false);
+    reset();
+    setIsEditing(false);
+    setEditId(null);
+    fetchAttendance();
+  } catch (err) {
+    console.error("خطأ", err);
+    const msg = err.response?.data?.message;
+    Swal.fire("خطأ", msg || "حدث خطأ أثناء حفظ الحضور", "error");
+}
+};
 
   const total = employees.length;
   const present = new Set(attendanceToday.map((a) => a.employeeId?._id)).size;

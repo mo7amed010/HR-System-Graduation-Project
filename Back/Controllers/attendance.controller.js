@@ -14,11 +14,9 @@ const createAttendance = async (req, res) => {
     if (error) {
       return res.status(400).json({ message: error.details[0].message });
     }
+
     const { employeeId, date, checkIn, checkOut } = req.body;
 
-  
-
-    // prevent duplication
     const startOfDay = dayjs(date).startOf("day").toDate();
     const endOfDay = dayjs(date).endOf("day").toDate();
 
@@ -74,7 +72,7 @@ const createAttendance = async (req, res) => {
       if (settings && settings.method === "money") {
         const amount = Number(
           ((totalMinutes / 60) * settings.add * 2).toFixed(2)
-        ); // ×2 for holidays
+        );
         if (!isNaN(amount)) {
           await SalaryAdjustments.create({
             employeeId,
@@ -92,7 +90,7 @@ const createAttendance = async (req, res) => {
       });
     }
 
-    // if not holiday → continue as normal
+    // if not holiday → normal day
     const lateMinutes = Math.max(
       0,
       dayjs(actualCheckIn).diff(dayjs(officialCheckIn), "minute")
@@ -126,7 +124,13 @@ const createAttendance = async (req, res) => {
         if (settings.method === "money") {
           amount = Number(((lateMinutes / 60) * settings.deduct).toFixed(2));
         } else if (settings.method === "hours") {
-          amount = Number((lateMinutes / 60).toFixed(2));
+          const hourlyRate = employee.salary / 22 / 8;
+          const hours = lateMinutes / 60;
+          amount = Number((hours * settings.deduct * hourlyRate).toFixed(2));
+          console.log("HourlyRate:", hourlyRate);
+          console.log("Hours:", hours);
+          console.log("Setting Add:", settings.add);
+          console.log("Amount:", amount);
         }
 
         if (!isNaN(amount)) {
@@ -145,7 +149,9 @@ const createAttendance = async (req, res) => {
         if (settings.method === "money") {
           amount = Number(((overtimeMinutes / 60) * settings.add).toFixed(2));
         } else if (settings.method === "hours") {
-          amount = Number((overtimeMinutes / 60).toFixed(2));
+          const hourlyRate = employee.salary / 22 / 8;
+          const hours = overtimeMinutes / 60;
+          amount = Number((hours * settings.add * hourlyRate).toFixed(2));
         }
 
         if (!isNaN(amount)) {
@@ -168,14 +174,11 @@ const createAttendance = async (req, res) => {
   }
 };
 
-
- 
-
-//  get attendance
-
+// get attendance
 const getAttendance = async (req, res) => {
   try {
-    const { fromDate, toDate, employeeId, employeeName, departmentId } = req.query;
+    const { fromDate, toDate, employeeId, employeeName, departmentId } =
+      req.query;
 
     let query = {};
 
@@ -193,7 +196,7 @@ const getAttendance = async (req, res) => {
       path: "employeeId",
       match: {
         ...(employeeName && {
-          name: { $regex: employeeName, $options: "i" }, 
+          name: { $regex: employeeName, $options: "i" },
         }),
         ...(departmentId && { department: departmentId }),
       },
@@ -212,7 +215,7 @@ const getAttendance = async (req, res) => {
   }
 };
 
-// edit attendance record
+// edit attendance
 const updateAttendance = async (req, res) => {
   try {
     const { checkIn, checkOut } = req.body;
@@ -269,7 +272,7 @@ const updateAttendance = async (req, res) => {
   }
 };
 
-// delete attendance record
+// delete attendance
 const deleteAttendance = async (req, res) => {
   try {
     const attendance = await AttendanceModel.findById(req.params.id);
@@ -277,7 +280,6 @@ const deleteAttendance = async (req, res) => {
       return res.status(404).json({ message: "Attendance not found" });
     }
 
-    // Delete related salary adjustments for this attendance
     await SalaryAdjustments.deleteMany({
       employeeId: attendance.employeeId,
       date: {
@@ -288,9 +290,9 @@ const deleteAttendance = async (req, res) => {
 
     await AttendanceModel.findByIdAndDelete(req.params.id);
 
-    res
-      .status(200)
-      .json({ message: "Attendance and related salary adjustments deleted" });
+    res.status(200).json({
+      message: "Attendance and related salary adjustments deleted",
+    });
   } catch (err) {
     res.status(500).json({ message: err.message });
   }

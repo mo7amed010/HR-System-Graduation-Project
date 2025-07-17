@@ -5,7 +5,6 @@ const employee=require('../Models/employee');
 
 exports.getAll = CatchAsync(async (req, res, next) => {
   const employees = await employee.find();
-
   res.status(200).json({
     status: "suc",
     data: employees,
